@@ -1,9 +1,45 @@
 #content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+  /* margin-left: auto;
+  margin-right: auto; */
+  width: 100%;
 }
 
-#greeting-container {
+/* #greeting-container {
   margin-top: 20px;
+} */
+
+body {
+  background-image: url('images/background4.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
+
+h1{
+    padding: 50px;
+    text-align: center;
+    top:0;
+    right:0;
+    /* background-color: white; */
+    color: white;
+    font-size: 70px;}
+a{
+    color:white;
+    font-size: 20px; 
+}
+p {padding:20px;
+    text-align: center;
+    /* margin-bottom: 20; */
+    color: white;}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* background-color: white; */
+  color: white;
+}
+        
