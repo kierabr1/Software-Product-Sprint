@@ -4,21 +4,21 @@
 
 body {
   background-attachment: fixed;
-  background-image: url('images/background4.jpeg');
+  background-image: url('images/background6.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 h1 {
     color: white;
-    font-size: 70px;
-    padding: 50px;
+    font-size: 90px;
+    padding: 40px;
     right: 0;
     text-align: center;
     top: 0;}
 a{
     color: white;
-    font-size: 20px; 
+    font-size: 30px; 
 }
 p {
     color: white;
@@ -29,9 +29,10 @@ p {
 footer {
     bottom: 0;
     color: white;
+    font-size: 20px;
     left: 0;
     text-align: center;
-    padding: 30px;
+    padding: 10px;
     position: fixed;
     width: 100%;
 }
