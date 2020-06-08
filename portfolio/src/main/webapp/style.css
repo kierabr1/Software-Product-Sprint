@@ -107,13 +107,12 @@ p {
  .topnav {
   background-color: black;
   overflow: hidden;
-  padding: 10px;
+  padding: 5px;
 }
 
 .topnav a {
   float: right;
   color: white;
-  font-weight: bold;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
