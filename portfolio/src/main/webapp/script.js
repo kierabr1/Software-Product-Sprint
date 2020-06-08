@@ -24,5 +24,5 @@ function addRandomFunFact() {
 
   // Add it to the page.
   const funfactContainer = document.getElementById('funfact-container');
-  funfactContainer.innerText = funcfact;
+  funfactContainer.innerText = funfact;
 }

@@ -45,6 +45,11 @@ footer {
     width: 100%;
 }
 
+#funfactContainer {
+    padding-left: 40px;
+    justify-content: center;
+}
+
 .image-thumbnails {
   display: flex;
   flex-wrap: wrap;
@@ -82,7 +87,7 @@ h2 {
 p {
     color: black;
     font-size: 20px;
-    padding: 60px;
+    padding: 40px;
 }
 
 .profile-picture {
@@ -100,13 +105,14 @@ p {
 }
 
  .topnav {
+  background-color: black;
   overflow: hidden;
   padding: 10px;
 }
 
 .topnav a {
   float: right;
-  color: black;
+  color: white;
   font-weight: bold;
   text-align: center;
   padding: 14px 16px;
