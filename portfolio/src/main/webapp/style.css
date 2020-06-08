@@ -46,8 +46,8 @@ footer {
 }
 
 #funfactContainer {
-    padding-left: 40px;
     justify-content: center;
+    padding-left: 40px;
 }
 
 .image-thumbnails {
@@ -111,10 +111,10 @@ p {
 }
 
 .topnav a {
-  float: right;
   color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  float: right;
   font-size: 25px;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
 }   
