@@ -42,7 +42,6 @@ public class DataServlet extends HttpServlet {
     response.setContentType("text/html;");
     String json = convertToJson(quotes);
     response.getWriter().println(json);
-    // String quote = quotes.get((int) (Math.random() * quotes.size()));
   }
 
   private String convertToJson(ArrayList<String> quotes) {

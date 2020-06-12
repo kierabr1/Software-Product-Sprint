@@ -28,8 +28,6 @@ function addRandomFunFact() {
 }
 
 function getRandomQuote() {
-//   fetch('/data').then(response => response.text()).then((quote) => {
-//     document.getElementById('quote-container').innerText = quote;
   fetch('/data').then(response => response.json()).then((quotes) => {
 
   const quoteListElement = document.getElementById('quote-container');
