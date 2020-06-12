@@ -66,7 +66,7 @@ function getRandomQuoteUsingArrowFunctions() {
  * allows you to use the return values directly instead of going through
  * Promises.
  */
-async function getRandomQuoteUsingAsyncAwait() {
+async function getRandomQuote() {
   const response = await fetch('/random-quote');
   const quote = await response.text();
   document.getElementById('quote-container').innerText = quote;

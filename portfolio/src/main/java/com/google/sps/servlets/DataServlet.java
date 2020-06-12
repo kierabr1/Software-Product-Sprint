@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+
   
   private List<String> quotes;
 
@@ -34,8 +35,8 @@ public class DataServlet extends HttpServlet {
     quotes.add("Bienvenidos");
     quotes.add("Bonjour");
     quotes.add("Aloha");
-    quotes.add("Kon'nichiwa");
   }
+  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String quote = quotes.get((int) (Math.random() * quotes.size()));
