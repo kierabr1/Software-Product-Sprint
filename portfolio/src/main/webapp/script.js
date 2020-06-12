@@ -26,3 +26,10 @@ function addRandomFunFact() {
   const funfactContainer = document.getElementById('funfact-container');
   funfactContainer.innerText = funfact;
 }
+
+function getRandomQuote() {
+  fetch('/data').then(response => response.text()).then((quote) => {
+    document.getElementById('quote-container').innerText = quote;
+  });
+}
+
