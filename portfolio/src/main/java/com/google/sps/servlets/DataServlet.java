@@ -27,10 +27,9 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   
-  private ArrayList<String> quotes;
+  private final List quotes = new ArrayList();
 
   public void init() {
-    quotes = new ArrayList<>();
     quotes.add("Welcome");
     quotes.add("Bienvenidos");
     quotes.add("Bonjour");
@@ -44,7 +43,7 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  private String convertToJson(ArrayList<String> quotes) {
+  private String convertToJson(List<String> quotes) {
     String json = "{";
     json += "\"English\": ";
     json += "\"" + quotes.get(0) + "\"";
