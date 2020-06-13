@@ -27,23 +27,18 @@ function addRandomFunFact() {
   funfactContainer.innerText = funfact;
 }
 
-function getRandomQuote() {
-  fetch('/data').then(response => response.json()).then((quotes) => {
+// TODO: Use following functions in step 5 to display comment
 
-  const quoteListElement = document.getElementById('quote-container');
-  quoteListElement.innerHTML = '';
+function getComment() {
+  fetch('/data').then(response => response.json()).then((entries) => {
+
+  const quoteListElement = document.getElementById('entry-container');
   quoteListElement.appendChild(
-      createQuoteElement('English: ' + quotes.English));
-  console.log(quotes.English);
+      createQuoteElement('Name: ' + entries.name));
   quoteListElement.appendChild(
-      createQuoteElement('Spanish: ' + quotes.Spanish));
-  console.log(quotes.Spanish);
+      createQuoteElement('Email: ' + entries.email));
   quoteListElement.appendChild(
-      createQuoteElement('French: ' + quotes.French));
-  console.log(quotes.French);
-  quoteListElement.appendChild(
-      createQuoteElement('Hawaiian: ' + quotes.Hawaiian));
-  console.log(quotes.Hawaiian);
+      createQuoteElement('Comment: ' + entries.comment));
   });
 }
 
@@ -51,5 +46,4 @@ function getRandomQuote() {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
-}
-
+ }

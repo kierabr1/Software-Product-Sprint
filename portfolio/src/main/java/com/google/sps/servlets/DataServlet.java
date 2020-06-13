@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,39 +26,36 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
   
-  private ArrayList<String> quotes;
-
-  public void init() {
-    quotes = new ArrayList<>();
-    quotes.add("Welcome");
-    quotes.add("Bienvenidos");
-    quotes.add("Bonjour");
-    quotes.add("Aloha");
-  }
+  private final List<String> entries = new ArrayList<String>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    String json = convertToJson(quotes);
+    String json = convertToJson(entries);
     response.getWriter().println(json);
   }
 
-  private String convertToJson(ArrayList<String> quotes) {
-    String json = "{";
-    json += "\"English\": ";
-    json += "\"" + quotes.get(0) + "\"";
-    json += ", ";
-    json += "\"Spanish\": ";
-    json += "\"" + quotes.get(1) + "\"";
-    json += ", ";
-    json += "\"French\": ";
-    json += "\"" + quotes.get(2) + "\"";
-    json += ", ";
-    json += "\"Hawaiian\": ";
-    json += "\"" + quotes.get(3) + "\"";
-    json += "}";
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    entries.add(getParameter(request, "name", ""));
+    entries.add(getParameter(request, "email", ""));
+    entries.add(getParameter(request, "comment", ""));
+    response.sendRedirect("/index.html");
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
+  private String convertToJson(List<String> entries) {
+    Gson gson = new Gson();
+    String json = gson.toJson(entries);
     return json;
   }
 }
