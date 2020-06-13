@@ -14,6 +14,10 @@
 
 package com.google.sps.servlets;
 
+
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,11 +42,19 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Get the input from the form.
-    entries.add(getParameter(request, "name", ""));
-    entries.add(getParameter(request, "email", ""));
-    entries.add(getParameter(request, "comment", ""));
+    // Get the input from the form and write to database.
+    writeToDatabase(getParameter(request, "name", ""), getParameter(request, "email", ""), getParameter(request, "comment", ""));
+
     response.sendRedirect("/index.html");
+  }
+
+  private void writeToDatabase(String name, String email, String comment){
+    Entity entryEntity = new Entity("Entry");
+    entryEntity.setProperty("name", name);
+    entryEntity.setProperty("email", email);
+    entryEntity.setProperty("comment", comment);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(entryEntity);
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
