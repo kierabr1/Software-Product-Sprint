@@ -28,8 +28,28 @@ function addRandomFunFact() {
 }
 
 function getRandomQuote() {
-  fetch('/data').then(response => response.text()).then((quote) => {
-    document.getElementById('quote-container').innerText = quote;
+  fetch('/data').then(response => response.json()).then((quotes) => {
+
+  const quoteListElement = document.getElementById('quote-container');
+  quoteListElement.innerHTML = '';
+  quoteListElement.appendChild(
+      createQuoteElement('English: ' + quotes.English));
+  console.log(quotes.English);
+  quoteListElement.appendChild(
+      createQuoteElement('Spanish: ' + quotes.Spanish));
+  console.log(quotes.Spanish);
+  quoteListElement.appendChild(
+      createQuoteElement('French: ' + quotes.French));
+  console.log(quotes.French);
+  quoteListElement.appendChild(
+      createQuoteElement('Hawaiian: ' + quotes.Hawaiian));
+  console.log(quotes.Hawaiian);
   });
+}
+
+ function createQuoteElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
 

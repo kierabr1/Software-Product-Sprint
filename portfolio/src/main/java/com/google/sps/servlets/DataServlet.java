@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   
-  private List<String> quotes;
+  private ArrayList<String> quotes;
 
   public void init() {
     quotes = new ArrayList<>();
@@ -39,8 +39,25 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String quote = quotes.get((int) (Math.random() * quotes.size()));
     response.setContentType("text/html;");
-    response.getWriter().println(quote);
+    String json = convertToJson(quotes);
+    response.getWriter().println(json);
+  }
+
+  private String convertToJson(ArrayList<String> quotes) {
+    String json = "{";
+    json += "\"English\": ";
+    json += "\"" + quotes.get(0) + "\"";
+    json += ", ";
+    json += "\"Spanish\": ";
+    json += "\"" + quotes.get(1) + "\"";
+    json += ", ";
+    json += "\"French\": ";
+    json += "\"" + quotes.get(2) + "\"";
+    json += ", ";
+    json += "\"Hawaiian\": ";
+    json += "\"" + quotes.get(3) + "\"";
+    json += "}";
+    return json;
   }
 }
