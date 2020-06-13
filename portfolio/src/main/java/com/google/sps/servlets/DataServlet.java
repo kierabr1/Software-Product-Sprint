@@ -40,18 +40,18 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Get the input from the form.
-    String name = getParameter(request, "name", "");
-    String email = getParameter(request, "email", "");
-    String comment = getParameter(request, "comment", "");
+    // Get the input from the form and write to database.
+    writeToDatabase(getParameter(request, "name", ""), getParameter(request, "email", ""), getParameter(request, "comment", ""));
+    response.sendRedirect("/index.html");
+  }
+
+  private void writeToDatabase(String name, String email, String comment){
     Entity entryEntity = new Entity("Entry");
     entryEntity.setProperty("name", name);
     entryEntity.setProperty("email", email);
     entryEntity.setProperty("comment", comment);
-
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(entryEntity);
-    response.sendRedirect("/index.html");
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
