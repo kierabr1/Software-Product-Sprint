@@ -27,24 +27,23 @@ function addRandomFunFact() {
   funfactContainer.innerText = funfact;
 }
 
-function getRandomQuote() {
-  fetch('/data').then(response => response.json()).then((quotes) => {
+//Saving code in case needed for step 5.
 
-  const quoteListElement = document.getElementById('quote-container');
-  quoteListElement.appendChild(
-      createQuoteElement('English: ' + quotes.English));
-  quoteListElement.appendChild(
-      createQuoteElement('Spanish: ' + quotes.Spanish));
-  quoteListElement.appendChild(
-      createQuoteElement('French: ' + quotes.French));
-  quoteListElement.appendChild(
-      createQuoteElement('Hawaiian: ' + quotes.Hawaiian));
-  });
-}
+// function getComment() {
+//   fetch('/data').then(response => response.json()).then((entries) => {
 
- function createQuoteElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  return liElement;
-}
+//   const quoteListElement = document.getElementById('entry-container');
+//   quoteListElement.appendChild(
+//       createQuoteElement('Name: ' + entries.name));
+//   quoteListElement.appendChild(
+//       createQuoteElement('Email: ' + entries.email));
+//   quoteListElement.appendChild(
+//       createQuoteElement('Comment: ' + entries.comment));
+//   });
+// }
 
+//  function createQuoteElement(text) {
+//   const liElement = document.createElement('li');
+//   liElement.innerText = text;
+//   return liElement;
+//  }

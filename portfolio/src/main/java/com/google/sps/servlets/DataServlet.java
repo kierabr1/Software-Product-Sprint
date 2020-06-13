@@ -25,37 +25,46 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
   
-  private final List quotes = new ArrayList();
-
-  public void init() {
-    quotes.add("Welcome");
-    quotes.add("Bienvenidos");
-    quotes.add("Bonjour");
-    quotes.add("Aloha");
-  }
+  private List<String> entries = new ArrayList<String>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    String json = convertToJson(quotes);
+    String json = convertToJson(entries);
     response.getWriter().println(json);
   }
 
-  private String convertToJson(List<String> quotes) {
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String name = getParameter(request, "name", "");
+    String email = getParameter(request, "email", "");
+    String comment = getParameter(request, "comment", "");
+    entries.add(name);
+    entries.add(email);
+    entries.add(comment);
+    response.sendRedirect("/index.html");
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
+  private String convertToJson(List<String> entries) {
     String json = "{";
-    json += "\"English\": ";
-    json += "\"" + quotes.get(0) + "\"";
+    json += "\"Name\": ";
+    json += "\"" + entries.get(0) + "\"";
     json += ", ";
-    json += "\"Spanish\": ";
-    json += "\"" + quotes.get(1) + "\"";
+    json += "\"Email\": ";
+    json += "\"" + entries.get(1) + "\"";
     json += ", ";
-    json += "\"French\": ";
-    json += "\"" + quotes.get(2) + "\"";
-    json += ", ";
-    json += "\"Hawaiian\": ";
-    json += "\"" + quotes.get(3) + "\"";
+    json += "\"Comment\": ";
+    json += "\"" + entries.get(2) + "\"";
     json += "}";
     return json;
   }
