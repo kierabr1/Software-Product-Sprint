@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   
-  private List<String> entries = new ArrayList<String>();
+  private final List<String> entries = new ArrayList<String>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -38,12 +39,9 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
-    String name = getParameter(request, "name", "");
-    String email = getParameter(request, "email", "");
-    String comment = getParameter(request, "comment", "");
-    entries.add(name);
-    entries.add(email);
-    entries.add(comment);
+    entries.add(getParameter(request, "name", ""));
+    entries.add(getParameter(request, "email", ""));
+    entries.add(getParameter(request, "comment", ""));
     response.sendRedirect("/index.html");
   }
 
@@ -56,16 +54,8 @@ public class DataServlet extends HttpServlet {
   }
 
   private String convertToJson(List<String> entries) {
-    String json = "{";
-    json += "\"Name\": ";
-    json += "\"" + entries.get(0) + "\"";
-    json += ", ";
-    json += "\"Email\": ";
-    json += "\"" + entries.get(1) + "\"";
-    json += ", ";
-    json += "\"Comment\": ";
-    json += "\"" + entries.get(2) + "\"";
-    json += "}";
+    Gson gson = new Gson();
+    String json = gson.toJson(entries);
     return json;
   }
 }
