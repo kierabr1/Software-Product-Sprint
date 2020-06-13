@@ -27,23 +27,23 @@ function addRandomFunFact() {
   funfactContainer.innerText = funfact;
 }
 
-//Saving code in case needed for step 5.
+// TODO: Use following functions in step 5 to display comment
 
-// function getComment() {
-//   fetch('/data').then(response => response.json()).then((entries) => {
+function getComment() {
+  fetch('/data').then(response => response.json()).then((entries) => {
 
-//   const quoteListElement = document.getElementById('entry-container');
-//   quoteListElement.appendChild(
-//       createQuoteElement('Name: ' + entries.name));
-//   quoteListElement.appendChild(
-//       createQuoteElement('Email: ' + entries.email));
-//   quoteListElement.appendChild(
-//       createQuoteElement('Comment: ' + entries.comment));
-//   });
-// }
+  const quoteListElement = document.getElementById('entry-container');
+  quoteListElement.appendChild(
+      createQuoteElement('Name: ' + entries.name));
+  quoteListElement.appendChild(
+      createQuoteElement('Email: ' + entries.email));
+  quoteListElement.appendChild(
+      createQuoteElement('Comment: ' + entries.comment));
+  });
+}
 
-//  function createQuoteElement(text) {
-//   const liElement = document.createElement('li');
-//   liElement.innerText = text;
-//   return liElement;
-//  }
+ function createQuoteElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+ }
