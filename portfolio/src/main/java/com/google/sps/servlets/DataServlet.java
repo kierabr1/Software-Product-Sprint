@@ -35,13 +35,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private final List<Entry> entries = new ArrayList<>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Entry").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+    List<Entry> entries = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
         String name = (String) entity.getProperty("name");
         String email = (String) entity.getProperty("email");
@@ -49,11 +49,12 @@ public class DataServlet extends HttpServlet {
         Entry entry = new Entry(name, email, comment);
         entries.add(entry);
     }
-
+    System.out.println(entries);
     Gson gson = new Gson();
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(entries));
   }
+  
 
 
   @Override

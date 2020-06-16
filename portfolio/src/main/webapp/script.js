@@ -30,6 +30,7 @@ function addRandomFunFact() {
 // TODO: Use following functions in step 5 to display comment.
 function getComment() {
   fetch('/data').then(response => response.json()).then((entries) => {
+  console.log(entries);
   const quoteListElement = document.getElementById('entry-container');
   entries.forEach((entry) => {
     quoteListElement.appendChild(
@@ -40,7 +41,6 @@ function getComment() {
         createQuoteElement('Comment: ' + entry.comment));
     })
   });
-  console.log(entries);
 }
 
  function createQuoteElement(text) {
