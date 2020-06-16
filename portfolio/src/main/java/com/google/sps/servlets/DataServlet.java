@@ -18,7 +18,11 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
+import com.google.sps.data.Entry;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,21 +34,32 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  
-  private final List<String> entries = new ArrayList<String>();
+
+  private final List<Entry> entries = new ArrayList<>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    String json = convertToJson(entries);
-    response.getWriter().println(json);
+    Query query = new Query("Entry").addSort("timestamp", SortDirection.DESCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+    for (Entity entity : results.asIterable()) {
+        String name = (String) entity.getProperty("name");
+        String email = (String) entity.getProperty("email");
+        String comment = (String) entity.getProperty("comment");
+        Entry entry = new Entry(name, email, comment);
+        entries.add(entry);
+    }
+
+    Gson gson = new Gson();
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(entries));
   }
+
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form and write to database.
-    writeToDatabase(getParameter(request, "name", ""), getParameter(request, "email", ""), getParameter(request, "comment", ""));
-
+    writeToDatabase(getParameter(request, "name", ""), getParameter(request, "email", ""), getParameter(request, "comment", ""));   
     response.sendRedirect("/index.html");
   }
 
@@ -63,11 +78,5 @@ public class DataServlet extends HttpServlet {
       return defaultValue;
     }
     return value;
-  }
-
-  private String convertToJson(List<String> entries) {
-    Gson gson = new Gson();
-    String json = gson.toJson(entries);
-    return json;
   }
 }

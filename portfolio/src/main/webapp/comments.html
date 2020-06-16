@@ -2,8 +2,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Comments</title>
+    <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="getComment()">
     <h1>Leave a Comment</h1>
 
     <form action="/data" method="POST">
@@ -21,5 +22,9 @@
       <br/><br/>
       <input type="submit" />
     </form>
+    <br>
+    <h1>Comments</h1>
+    <br>
+    <ul id="entry-container"></ul>
   </body>
 </html>

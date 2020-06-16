@@ -27,19 +27,20 @@ function addRandomFunFact() {
   funfactContainer.innerText = funfact;
 }
 
-// TODO: Use following functions in step 5 to display comment
-
+// TODO: Use following functions in step 5 to display comment.
 function getComment() {
   fetch('/data').then(response => response.json()).then((entries) => {
-
   const quoteListElement = document.getElementById('entry-container');
-  quoteListElement.appendChild(
-      createQuoteElement('Name: ' + entries.name));
-  quoteListElement.appendChild(
-      createQuoteElement('Email: ' + entries.email));
-  quoteListElement.appendChild(
-      createQuoteElement('Comment: ' + entries.comment));
+  entries.forEach((entry) => {
+    quoteListElement.appendChild(
+        createQuoteElement('Name: ' + entry.name));
+    quoteListElement.appendChild(
+        createQuoteElement('Email: ' + entry.email));
+    quoteListElement.appendChild(
+        createQuoteElement('Comment: ' + entry.comment));
+    })
   });
+  console.log(entries);
 }
 
  function createQuoteElement(text) {
