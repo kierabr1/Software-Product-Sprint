@@ -16,7 +16,6 @@ package com.google.sps.data;
 
 /** An item on a todo list. */
 public final class Entry {
-
   private final String name;
   private final String email;
   private final String comment;
