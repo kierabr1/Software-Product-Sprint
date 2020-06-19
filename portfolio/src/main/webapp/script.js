@@ -16,8 +16,11 @@
  * Adds a random greeting to the page.
  */
 function addRandomFunFact() {
-  const funfacts =
-      ['I started dancing at age 3.', 'I have coached a robotics team.', 'I love horror movies.', 'I wanted to be a medical examiner before I decided to pursue tech.'];
+  const funfacts = [
+    'I started dancing at age 3.', 'I have coached a robotics team.',
+    'I love horror movies.',
+    'I wanted to be a medical examiner before I decided to pursue tech.'
+  ];
 
   // Pick a random greeting.
   const funfact = funfacts[Math.floor(Math.random() * funfacts.length)];
@@ -27,23 +30,19 @@ function addRandomFunFact() {
   funfactContainer.innerText = funfact;
 }
 
-// TODO: Use following functions in step 5 to display comment
-
+// TODO: Use following functions in step 5 to display comment.
 function getComment() {
   fetch('/data').then(response => response.json()).then((entries) => {
-
-  const quoteListElement = document.getElementById('entry-container');
-  quoteListElement.appendChild(
-      createQuoteElement('Name: ' + entries.name));
-  quoteListElement.appendChild(
-      createQuoteElement('Email: ' + entries.email));
-  quoteListElement.appendChild(
-      createQuoteElement('Comment: ' + entries.comment));
+    console.log(entries);
+    const quoteListElement = document.getElementById('entry-container');
+    entries.forEach((entry) => {
+      quoteListElement.appendChild(createQuoteElement('Name: ' + entry.name + ': ' + entry.comment));
+    })
   });
 }
 
- function createQuoteElement(text) {
+function createQuoteElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
- }
+}
