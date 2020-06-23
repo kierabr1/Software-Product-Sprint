@@ -35,6 +35,13 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    List entries = readFromDatastore();
+    Gson gson = new Gson();
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(entries));
+  }
+
+  private List readFromDatastore() {
     Query query = new Query("Entry");
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
@@ -47,9 +54,7 @@ public class DataServlet extends HttpServlet {
       entries.add(entry);
     }
     System.out.println(entries);
-    Gson gson = new Gson();
-    response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(entries));
+    return entries;
   }
 
   @Override
