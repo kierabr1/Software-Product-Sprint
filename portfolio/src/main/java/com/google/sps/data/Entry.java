@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* Class for specifying comment text and metadata. */
+
 package com.google.sps.data;
 
-/** An item on a todo list. */
 public final class Entry {
   private final String name;
   private final String email;
