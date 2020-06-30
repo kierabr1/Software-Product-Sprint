@@ -24,11 +24,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/* This is a server to take live data from a user poll */
 @WebServlet("/vote-data")
 public class VoteDataServlet extends HttpServlet {
 
-  private Map<String, Integer> pollVotes = new HashMap<>();
+  private final Map<String, Integer> pollVotes = new HashMap<>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -41,7 +41,8 @@ public class VoteDataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String choice = request.getParameter("choice");
-    int currentVotes = pollVotes.containsKey(choice) ? pollVotes.get(choice) : 0;
+    int currentVotes = pollVotes.getOrDefault(choice, 0);
+    //containsKey(choice) ? pollVotes.get(choice) : 0;
     pollVotes.put(choice, currentVotes + 1);
 
     response.sendRedirect("/about.html");
